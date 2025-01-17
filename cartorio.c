@@ -59,8 +59,6 @@ int registro() ////implementação da função de cadastro
 	file = fopen(arquivo, "a");//abre e adiciona informação ao arquivo já criado
 	fprintf(file,".");//salva a informação no arquivo
 	fclose(file);//fecha o arquivo
-	
-	system("pause");//msg pausada até interação do usuário
 }
 
 int consulta() //implementação da função consulta
@@ -89,8 +87,6 @@ int consulta() //implementação da função consulta
 		printf("%s",conteudo);
 		printf("\n\n");//msg para o usuário
 	}
-	
-	system("pause"); //msg pausada até interação do usuário
 }
 
 int deletar()//implementação da função deletar
@@ -111,60 +107,72 @@ int deletar()//implementação da função deletar
 		{
 			printf("O CPF do usuário foi deletado com sucesso!\n");//msg ao usuário
 		}
-		
-	system("pause");//msg pausada até interação do usuário
 }
 
 int main()
 {
+	setlocale(LC_ALL, "Portuguese");
+	
 	int opcao=0; //definição de variável
 	int laco=1; //define o laço repetição
+	char senhadigitada[40];
+	const char senhaCorreta[] = "admin";	
 	
-	for(laco=1;laco=1;)
-	{
-		system("cls");//limpar dados da tela
-			
-		setlocale(LC_ALL, "Portuguese"); //definição de idioma
-	
-		printf("***** Bem-vindo ao Cartório da EBAC! *****\n\n"); //início do menu
-		printf("Escolha a opção desejada no menu:\n\n");
-		printf("\t1. Registrar nomes\n");
-		printf("\t2. Consultar nomes\n");
-		printf("\t3. Remover nomes\n");
-		printf("\t4. Encerrar\n\n");
-		printf("Opção desejada: "); //fim do menu
-	
-		scanf("%d", &opcao); //armazenando a escolha do usuário
+	printf("Cartório EBAC | Login Administrador\n\n");
+	printf("Informe a sua senha: ");
+	scanf("%s", senhadigitada);
 		
-		system("cls");//limpar dados da tela
 		
-		switch(opcao) //inicio da seleção
+	if(strcmp(senhadigitada, senhaCorreta) == 0)
+	{ do
 		{
-			case 1:
-			registro();//execução da função
-			break;//fim do laço de repetição
+			system("cls");//limpar dados da tela				
+			printf("***** Bem-vindo ao Cartório da EBAC! *****\n\n"); //início do menu
+			printf("Escolha a opção desejada no menu:\n\n");
+			printf("\t1. Registrar nomes\n");
+			printf("\t2. Consultar nomes\n");
+			printf("\t3. Remover nomes\n");
+			printf("\t4. Encerrar\n\n");
+			printf("Opção desejada: "); //fim do menu
+			scanf("%d", &opcao); //armazenando a escolha do usuário
 			
-			case 2:  
-			consulta();//execução da função
-			break;//fim do laço de repetição		
+			system("cls");//limpar dados da tela
+		
+			switch(opcao)//inicio da seleção
+			{ 
+				case 1:
+					registro();//execução da função
+					break;//fim do laço de repetição
+					
+				case 2:  
+					consulta();//execução da função
+					break;//fim do laço de repetição		
+					
+				case 3:
+					deletar();//execução da função
+					break; //fim do laço de repetição
+					
+				case 4:
+					printf("Obrigado por o usar o nosso sistema. Até logo!");
+					return 0;
+					break;//fim da seleção
+					
+				default:
+					printf("Essa opção está indisponível!\n");
+					system("pause"); //msg pausada até interação do usuário
+					break;//fim do laço de repetição
+			}
+			system("pause");
 			
-			case 3:
-			deletar();//execução da função
-			break; //fim do laço de repetição
-			
-			case 4:
-			printf("Obrigado por o usar o nosso sistema. Até logo!");
-			return 0;
-			break;
-			
-			//fim da seleção
-			
-			default:
-			printf("Essa opção está indisponível!\n");
-			system("pause"); //msg pausada até interação do usuário
-			break;//fim do laço de repetição
 		}
+		while (opcao != 4);
 	}
+	
+	else
+	{
+		printf("Senha incorreta! Verifique e tente novamente.");
+	}
+		
 }
 
 
